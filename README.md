@@ -7,14 +7,14 @@ There is also a [wiki](../../wiki) for this repository.
 We (ExMatEx) have been using redis since the early days of the project. At the
 time, redis did not support distribution. It did support replication for fault
 tolerance, but not distributing (or sharding) data across multiple nodes to
-support large databases. With the arrival or redis 3.0, distribution is now
+support large databases. With the arrival of redis 3.0, distribution is now
 supported. This repository contains some instructions and simple test code
 designed to explore redis 3.0 on LANL's Darwin cluster.
 
 Installation of redis is relatively straightforward. In the past we have
 installed it as a local module on Darwin. This repo uses redis as if it were
 installed by a user into their personal directories. It's unlikely we'll be
-able to install system wide on other DoE clusters, so testing user
+able to install system-wide on other DoE clusters, so testing user
 installations is essential.
 
 ### Installation
@@ -28,9 +28,9 @@ applications.
 
 ### Requirements
 Redis easily installs with no requirements for additional software. However, to
-set up and run a distributed cluster, Ruby is required. Moreover, the redis gem
-is also required. We've installed it globally on Darwin, but a savvy Ruby user
-should be able to figure out how to install it locally using
+set up and run a distributed cluster, Ruby is required. Moreover, the `redis`
+gem is also required. We've installed it globally on Darwin, but a savvy
+Ruby user should be able to figure out how to install it locally using
 [rvm](https://rvm.io/).
 
 ### Darwin-specific script
@@ -41,12 +41,12 @@ from Christoph's original `start_redis` script in `SkelMM` and from the redis
 
 Edit the script and update the `redis_tmp` and `redis_bin` variables to reflect
 where to store temporary files and the install location of redis
-respectively. The script is set up to use three nodes of the cluster (which you
-must have previously allocated using slurm). The script creates `N` master
-instances of redis on `N` nodes and `N` slaves for these masters on the
+respectively. The script is set up to use `N` nodes of the Darwin cluster
+(which you must have previously allocated using slurm). The script creates `N`
+master instances of redis on `N` nodes and `N` slaves for these masters on the
 same set of `N` nodes. So, you'll have a total of `N` nodes running `2*N`
-instances of redis. The script supports one command line parameter: start,
-create, or stop. The following shows the sequence of commands to start the
+instances of redis. The script supports one command line parameter: `start`,
+`create`, or `stop`. The following shows the sequence of commands to start the
 cluster:
 
 ```bash
@@ -60,9 +60,10 @@ cd scripts
 
 An initial port number is specified in the script. This port number is
 incremented sequentially to address all the masters and slaves. Use any port to
-connect to the database--queries will be rerouted the node containing the data
-for a specified key (the cluster redis document specifies the hashing algorithm
-and hos a smart client would cache the mapping between keys and nodes).
+connect to the database--queries will be automatically rerouted the node
+containing the data for the specified key (the cluster redis document describes
+the hashing algorithm and how a smart client would cache the mapping between
+keys and nodes).
 
 Finally, the script is not totally automated. Redis software requires that you
 accept a potential cluster configuration by typing `yes` to a prompt. There may
