@@ -1,7 +1,9 @@
 # nosql
 Installation, testing, benchmarking, and interfacing to NoSQL databases.
 
-There is also a [wiki](../../wiki) for this repository.
+There is also a [wiki](../../wiki) for this repository which will cover testing
+and performance results of the various NoSQL databases that we explore (minimal
+content now).
 
 ## Redis
 We (ExMatEx) have been using redis since the early days of the project. At the
