@@ -1,6 +1,8 @@
 # nosql
 Installation, testing, benchmarking, and interfacing to NoSQL databases.
 
+There is also a [wiki](wiki) for this repository.
+
 Databases being evaluated:
 * Redis
 * RAMCloud
